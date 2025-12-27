@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "settings": {
+    "color": {
+      "custom": false,
+      "palette": [
+        { "name": "Background", "slug": "bg", "color": "#0b0f12" },
+        { "name": "Text", "slug": "text", "color": "#f3f5f7" },
+        { "name": "Accent", "slug": "accent", "color": "#e0206a" },
+        { "name": "Accent 2", "slug": "accent2", "color": "#c06020" }
+      ]
+    },
+    "typography": {
+      "customFontSize": false
+    }
+  }
+}
