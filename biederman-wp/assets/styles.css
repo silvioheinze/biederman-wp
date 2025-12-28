@@ -99,6 +99,9 @@ img{ max-width:100%; height:auto; display:block; }
 
 /* Hero */
 .hero{ padding: 3.5rem 0 2.25rem; }
+.wp-block-biederman-hero{
+  margin-top: 2em;
+}
 .hero__grid{
   display:grid !important;
   grid-template-columns: 1.05fr .95fr !important;
@@ -171,16 +174,16 @@ h1{
 
 .hero__art{
   margin:0;
-  background: rgba(255,255,255,.03);
-  border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow:hidden;
-  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .hero__art img{
-  width:100%;
-  aspect-ratio: 1205/556;
-  object-fit: cover;
+  width: auto;
+  height: auto;
+  max-width: 100%;
 }
 .hero__art figcaption{
   padding: .75rem .9rem;
@@ -270,7 +273,6 @@ h3{ margin: .2rem 0 .45rem; font-size: 1.15rem; }
 /* Media layout */
 .media{
   display:grid;
-  grid-template-columns: 1.2fr .8fr;
   gap: 1rem;
   align-items:start;
 }
