@@ -5,6 +5,24 @@
 
 if (!defined('ABSPATH')) { exit; }
 
+// Include custom post types
+require_once get_template_directory() . '/inc/post-types.php';
+
+// Include custom blocks
+require_once get_template_directory() . '/inc/blocks.php';
+
+// Include template functions
+require_once get_template_directory() . '/inc/template-functions.php';
+
+// Include shortcodes
+require_once get_template_directory() . '/inc/shortcodes.php';
+
+// Include meta boxes
+require_once get_template_directory() . '/inc/meta-boxes.php';
+
+// Include block template hooks
+require_once get_template_directory() . '/inc/block-template-hooks.php';
+
 /**
  * Setup theme defaults.
  */
@@ -13,6 +31,20 @@ function biederman_setup() {
   add_theme_support('post-thumbnails');
   add_theme_support('html5', array('search-form','comment-form','comment-list','gallery','caption','style','script'));
   add_theme_support('responsive-embeds');
+  
+  // Gutenberg support
+  add_theme_support('wp-block-styles');
+  add_theme_support('align-wide');
+  add_theme_support('editor-styles');
+  add_editor_style('assets/editor-styles.css');
+  
+  // Block templates
+  add_theme_support('block-templates');
+  
+  // Enable custom fields in block editor
+  add_post_type_support('show', 'custom-fields');
+  add_post_type_support('press_asset', 'custom-fields');
+  
   register_nav_menus(array(
     'primary' => __('Primary Menu', 'biederman'),
   ));
@@ -116,5 +148,22 @@ function biederman_customize_register($wp_customize) {
 
   $wp_customize->add_setting('biederman_facebook', array('default'=>'','sanitize_callback'=>'esc_url_raw'));
   $wp_customize->add_control('biederman_facebook', array('label'=>__('Facebook URL','biederman'),'section'=>'biederman_links','type'=>'url'));
+
+  // Section: Navigation
+  $wp_customize->add_section('biederman_navigation', array(
+    'title' => __('Biederman: Navigation', 'biederman'),
+    'priority' => 33,
+  ));
+
+  $wp_customize->add_setting('biederman_show_navigation', array(
+    'default' => true,
+    'sanitize_callback' => 'rest_sanitize_boolean',
+  ));
+  $wp_customize->add_control('biederman_show_navigation', array(
+    'label' => __('Show navigation menu', 'biederman'),
+    'section' => 'biederman_navigation',
+    'type' => 'checkbox',
+    'description' => __('Uncheck to hide the top navigation menu', 'biederman'),
+  ));
 }
 add_action('customize_register', 'biederman_customize_register');

@@ -1,0 +1,16 @@
+.wp-block-biederman-show-list {
+  margin: 1em 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.wp-block-biederman-show-list .cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+

@@ -28,19 +28,37 @@ if (!defined('ABSPATH')) { exit; }
 
     <nav class="nav" id="nav" aria-label="<?php esc_attr_e('Hauptnavigation', 'biederman'); ?>">
       <?php
-        wp_nav_menu(array(
-          'theme_location' => 'primary',
-          'container' => false,
-          'fallback_cb' => function () {
-            echo '<a href="#shows">Shows</a>';
-            echo '<a href="#media">Media</a>';
-            echo '<a href="#about">Über uns</a>';
-            echo '<a href="#press">Presse</a>';
-            echo '<a class="cta" href="#contact">Booking</a>';
-          },
-          'items_wrap' => '%3$s',
-          'depth' => 1,
-        ));
+        // Check if we should show navigation (can be controlled via theme mod)
+        // Default to true if not set
+        $show_nav = get_theme_mod('biederman_show_navigation');
+        if ($show_nav === false) {
+          $show_nav = true; // Default to true
+        }
+        
+        if ($show_nav) {
+          // Check if a menu is assigned, otherwise use fallback
+          $menu_locations = get_nav_menu_locations();
+          $has_menu = isset($menu_locations['primary']) && $menu_locations['primary'] > 0;
+          
+          if ($has_menu) {
+            // Show WordPress menu if one is assigned
+            wp_nav_menu(array(
+              'theme_location' => 'primary',
+              'container' => false,
+              'items_wrap' => '%3$s',
+              'depth' => 1,
+            ));
+          } else {
+            // Fallback: show anchor links only on front page (one-page site)
+            if (is_front_page()) {
+              echo '<a href="#shows">Shows</a>';
+              echo '<a href="#media">Media</a>';
+              echo '<a href="#about">Über uns</a>';
+              echo '<a href="#press">Presse</a>';
+              echo '<a class="cta" href="#contact">Booking</a>';
+            }
+          }
+        }
       ?>
     </nav>
   </div>

@@ -1,0 +1,331 @@
+<!-- wp:group {"tagName":"main","className":"main","layout":{"type":"constrained"}} -->
+<main id="main" class="wp-block-group main">
+<!-- wp:group {"className":"hero","layout":{"type":"constrained"}} -->
+<div class="wp-block-group hero" aria-label="Hero">
+	<!-- wp:group {"className":"container hero__grid","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group container hero__grid">
+		<!-- wp:group {"className":"hero__copy","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group hero__copy">
+		<!-- wp:html -->
+		<p class="kicker">[tagline]</p>
+		<!-- /wp:html -->
+
+		<!-- wp:html -->
+		<h1>[site_name]</h1>
+		<!-- /wp:html -->
+
+		<!-- wp:html -->
+		<p class="lead">[lead]</p>
+		<!-- /wp:html -->
+
+			<!-- wp:buttons {"className":"hero__actions"} -->
+			<div class="wp-block-buttons hero__actions">
+				<!-- wp:button {"className":"is-style-primary"} -->
+				<div class="wp-block-button is-style-primary"><a class="wp-block-button__link wp-element-button" href="#shows">Nächster Gig</a></div>
+				<!-- /wp:button -->
+
+				<!-- wp:button -->
+				<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#media">Reinhören</a></div>
+				<!-- /wp:button -->
+			</div>
+			<!-- /wp:buttons -->
+
+			<!-- wp:list {"className":"chips","ariaLabel":"Kurzinfo"} -->
+			<ul class="wp-block-list chips" aria-label="Kurzinfo">
+				<!-- wp:list-item -->
+				<li>Wien</li>
+				<!-- /wp:list-item -->
+
+				<!-- wp:list-item -->
+				<li>Live &amp; Comedy</li>
+				<!-- /wp:list-item -->
+
+				<!-- wp:list-item -->
+				<li>Booking &amp; Presse</li>
+				<!-- /wp:list-item -->
+			</ul>
+			<!-- /wp:list -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:image {"className":"hero__art","id":0,"sizeSlug":"full","linkDestination":"none","url":"/wp-content/themes/biederman-wp/assets/biederman-loop-26-hp.png","alt":"Biederman – ReleaseParty Poster","width":1205,"height":556} -->
+		<figure class="wp-block-image hero__art"><img src="/wp-content/themes/biederman-wp/assets/biederman-loop-26-hp.png" alt="Biederman – ReleaseParty Poster" width="1205" height="556" loading="eager"/><figcaption class="wp-element-caption">Aktuell: ReleaseParty @ Loop, Wien</figcaption></figure>
+		<!-- /wp:image -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"id":"shows","className":"section","layout":{"type":"constrained"}} -->
+<div id="shows" class="wp-block-group section">
+	<!-- wp:group {"className":"container","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group container">
+		<!-- wp:group {"className":"section__head","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group section__head">
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">Shows</h2>
+			<!-- /wp:heading -->
+
+			<!-- wp:paragraph -->
+			<p>Tickets, Kalender-Export und alle Infos an einem Ort.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:biederman/show-featured /-->
+
+		<!-- wp:biederman/show-list {"limit":3} /-->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"id":"media","className":"section section--alt","layout":{"type":"constrained"}} -->
+<div id="media" class="wp-block-group section section--alt">
+	<!-- wp:group {"className":"container","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group container">
+		<!-- wp:group {"className":"section__head","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group section__head">
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">Media</h2>
+			<!-- /wp:heading -->
+
+			<!-- wp:paragraph -->
+			<p>Ein Platz für euer neuestes Video, Live-Mitschnitte oder Playlist-Embeds.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"className":"media","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group media">
+			<!-- wp:embed {"className":"embed","responsive":true} -->
+			<figure class="wp-block-embed is-type-video embed"><div class="wp-block-embed__wrapper">
+				<div class="embed__ratio" role="group" aria-label="Video Platzhalter">
+					<div class="embed__placeholder">
+						<p><strong>Video-Embed</strong></p>
+						<p class="muted">Ersetzt diesen Block z.B. mit einem YouTube/Vimeo iFrame.</p>
+					</div>
+				</div>
+			</div></figure>
+			<!-- /wp:embed -->
+
+			<!-- wp:columns {"className":"stack"} -->
+			<div class="wp-block-columns stack">
+				<!-- wp:column {"className":"panel"} -->
+				<div class="wp-block-column panel">
+					<!-- wp:heading {"level":3} -->
+					<h3 class="wp-block-heading">Streaming</h3>
+					<!-- /wp:heading -->
+
+					<!-- wp:paragraph {"className":"muted"} -->
+					<p class="muted">Links zu Spotify, Apple Music, Bandcamp &amp; Co.</p>
+					<!-- /wp:paragraph -->
+
+					<!-- wp:paragraph {"className":"links"} -->
+					<p class="links">
+						<a href="#" aria-disabled="true">Spotify</a>
+						<a href="#" aria-disabled="true">Apple Music</a>
+						<a href="#" aria-disabled="true">Bandcamp</a>
+						<a href="#" aria-disabled="true">YouTube</a>
+					</p>
+					<!-- /wp:paragraph -->
+
+					<!-- wp:paragraph {"className":"small muted"} -->
+					<p class="small muted">Tipp: Nutzt „Link-in-bio" nur als Ergänzung — eure Website bleibt der Hub.</p>
+					<!-- /wp:paragraph -->
+				</div>
+				<!-- /wp:column -->
+
+				<!-- wp:column {"className":"panel"} -->
+				<div class="wp-block-column panel">
+					<!-- wp:heading {"level":3} -->
+					<h3 class="wp-block-heading">Newsletter</h3>
+					<!-- /wp:heading -->
+
+					<!-- wp:paragraph {"className":"muted"} -->
+					<p class="muted">Updates zu Shows, Releases und exklusiven Dingen.</p>
+					<!-- /wp:paragraph -->
+
+					<!-- wp:html -->
+					<form id="newsletter" class="form" autocomplete="on">
+						<label>
+							<span class="sr">E-Mail</span>
+							<input name="email" type="email" required placeholder="deine@email.at" inputmode="email" />
+						</label>
+						<button class="button primary" type="submit">Anmelden</button>
+						<p class="small muted">
+							Double-Opt-In empfohlen. Kein Spam.
+							<a href="#privacy" class="textlink">Datenschutz</a>.
+						</p>
+					</form>
+					<p class="small" id="nl-msg" role="status" aria-live="polite"></p>
+					<!-- /wp:html -->
+				</div>
+				<!-- /wp:column -->
+			</div>
+			<!-- /wp:columns -->
+		</div>
+		<!-- /wp:group -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"id":"about","className":"section","layout":{"type":"constrained"}} -->
+<div id="about" class="wp-block-group section">
+	<!-- wp:group {"className":"container","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group container">
+		<!-- wp:group {"className":"section__head","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group section__head">
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">Über uns</h2>
+			<!-- /wp:heading -->
+
+			<!-- wp:paragraph -->
+			<p>Kurzer Pitch + was euch als Band ausmacht (für Fans, Presse &amp; Booker).</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:columns {"className":"cols"} -->
+		<div class="wp-block-columns cols">
+			<!-- wp:column -->
+			<div class="wp-block-column">
+				<!-- wp:paragraph -->
+				<p><strong>Biederman</strong> verbindet Generationen auf der Bühne: Songs, Pointen und Popkultur – mit einem Blick nach vorne und einem liebevollen Augenzwinkern zurück.</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:paragraph {"className":"muted"} -->
+				<p class="muted">Diese Texte sind Platzhalter. Tauscht sie gegen euren echten Band-Text aus.</p>
+				<!-- /wp:paragraph -->
+			</div>
+			<!-- /wp:column -->
+
+			<!-- wp:column -->
+			<div class="wp-block-column">
+				<!-- wp:html -->
+				<div class="facts" aria-label="Facts">
+					<div class="fact"><div class="fact__k">Stil</div><div class="fact__v">Comedy · Live · Pop</div></div>
+					<div class="fact"><div class="fact__k">Base</div><div class="fact__v">Wien</div></div>
+					<div class="fact"><div class="fact__k">Buchung</div><div class="fact__v"><a class="textlink" href="#contact">Kontakt →</a></div></div>
+					<div class="fact"><div class="fact__k">Technik</div><div class="fact__v">Rider / Inputs auf Anfrage</div></div>
+				</div>
+				<!-- /wp:html -->
+			</div>
+			<!-- /wp:column -->
+		</div>
+		<!-- /wp:columns -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"id":"press","className":"section section--alt","layout":{"type":"constrained"}} -->
+<div id="press" class="wp-block-group section section--alt">
+	<!-- wp:group {"className":"container","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group container">
+		<!-- wp:group {"className":"section__head","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group section__head">
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">Presse &amp; Press Assets</h2>
+			<!-- /wp:heading -->
+
+			<!-- wp:paragraph -->
+			<p>Alles, was Medien &amp; Veranstalter schnell brauchen.</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:group {"className":"cards","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group cards">
+			<!-- wp:group {"className":"card","layout":{"type":"constrained"}} -->
+			<div class="wp-block-group card">
+				<!-- wp:heading {"level":3} -->
+				<h3 class="wp-block-heading">Pressetext (kurz)</h3>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"className":"muted"} -->
+				<p class="muted">Ein Absatz, der sofort erklärt, wer ihr seid, wie es klingt/ist und warum das Publikum kommen sollte.</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:html -->
+				<button class="button" id="btn-copy-press" type="button">Text kopieren</button>
+				<p class="small muted" id="press-msg" role="status" aria-live="polite"></p>
+				<textarea id="press-text" class="sr" aria-hidden="true">Biederman ist die witzigste generationsübergreifende Band: Live, laut, liebevoll – mit Songs und Schmäh, die verbinden.</textarea>
+				<!-- /wp:html -->
+			</div>
+			<!-- /wp:group -->
+
+			<!-- wp:biederman/press-assets /-->
+		</div>
+		<!-- /wp:group -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"id":"contact","className":"section","layout":{"type":"constrained"}} -->
+<div id="contact" class="wp-block-group section">
+	<!-- wp:group {"className":"container","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group container">
+		<!-- wp:group {"className":"section__head","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group section__head">
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">Booking &amp; Kontakt</h2>
+			<!-- /wp:heading -->
+
+			<!-- wp:paragraph -->
+			<p>Schnellster Weg: Mail. Alternativ Kontaktformular (mit Backend).</p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:columns {"className":"contact","layout":{"type":"constrained"}} -->
+		<div class="wp-block-columns contact">
+			<!-- wp:column {"className":"panel"} -->
+			<div class="wp-block-column panel">
+				<!-- wp:heading {"level":3} -->
+				<h3 class="wp-block-heading">Direkt</h3>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"className":"muted"} -->
+				<p class="muted">Ersetzt die Platzhalter-Adresse mit eurer echten Booking-Mail (Customizer).</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:biederman/booking-email /-->
+
+				<!-- wp:biederman/social-links /-->
+			</div>
+			<!-- /wp:column -->
+
+			<!-- wp:column {"className":"panel","id":"privacy"} -->
+			<div id="privacy" class="wp-block-column panel">
+				<!-- wp:heading {"level":3} -->
+				<h3 class="wp-block-heading">Datenschutz (Kurz)</h3>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"className":"muted"} -->
+				<p class="muted">Wenn ihr ein Newsletter-Tool oder Analytics nutzt: informiert transparent, holt Einwilligungen ein und verlinkt eine vollständige Datenschutzerklärung.</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:html -->
+				<details>
+					<summary>Mini-Checkliste</summary>
+					<ul class="list">
+						<li>Impressum &amp; Kontakt</li>
+						<li>Datenschutzerklärung (Newsletter/Tracking/Embeds)</li>
+						<li>Cookie-/Consent-Banner, falls nicht-essenzielle Cookies gesetzt werden</li>
+					</ul>
+				</details>
+				<!-- /wp:html -->
+			</div>
+			<!-- /wp:column -->
+		</div>
+		<!-- /wp:columns -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+

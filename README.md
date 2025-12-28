@@ -60,6 +60,12 @@ A Docker Compose setup for WordPress theme development with MariaDB.
 - **Root Password:** `rootpassword`
 - **Data Volume:** `db_data` (persists database)
 
+### Node.js (for building blocks)
+- **Container:** `biederman-wp-node`
+- **Image:** `node:18`
+- **Purpose:** Building Gutenberg blocks with npm
+- **Profile:** `build` (only starts when explicitly requested)
+
 ## Database Connection
 
 If you need to connect to the database from outside the containers:
@@ -95,6 +101,26 @@ docker exec -it biederman-wp-db bash
 ### Access MariaDB CLI
 ```bash
 docker exec -it biederman-wp-db mysql -u wordpress -pwordpress wordpress
+```
+
+### Build Gutenberg blocks
+```bash
+# Start the Node container (if not already running)
+docker-compose --profile build up -d node
+
+# Run npm install (first time only)
+docker-compose exec node npm install
+
+# Build all blocks
+docker-compose exec node npm run build
+
+# Or run a single command
+docker-compose exec node npm run build
+```
+
+### Access Node container shell
+```bash
+docker exec -it biederman-wp-node bash
 ```
 
 ### Restart services

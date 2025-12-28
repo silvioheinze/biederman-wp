@@ -34,6 +34,18 @@ services:
     ports:
       - "8080:80"
 
+  node:
+    image: node:18
+    container_name: biederman-wp-node
+    working_dir: /app
+    volumes:
+      - ./biederman-wp:/app
+    networks:
+      - wordpress-network
+    command: tail -f /dev/null
+    profiles:
+      - build
+
 volumes:
   db_data:
   wordpress_data:
@@ -41,4 +53,3 @@ volumes:
 networks:
   wordpress-network:
     driver: bridge
-

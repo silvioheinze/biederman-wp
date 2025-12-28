@@ -12,3 +12,11 @@ Thumbs.db
 *.swo
 *~
 
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+
+# Block builds
+biederman-wp/blocks/*/build/
+

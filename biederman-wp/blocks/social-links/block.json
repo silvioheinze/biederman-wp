@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "biederman/social-links",
+  "title": "Social Links",
+  "category": "biederman",
+  "icon": "share",
+  "description": "Display social media links from customizer settings.",
+  "keywords": ["social", "links", "instagram", "youtube"],
+  "textdomain": "biederman",
+  "attributes": {},
+  "supports": {
+    "html": false,
+    "align": ["left", "center", "right"]
+  },
+  "render": "file:./render.php"
+}
+

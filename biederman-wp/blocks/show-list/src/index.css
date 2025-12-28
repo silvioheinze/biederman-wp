@@ -1,0 +1,117 @@
+.wp-block-biederman-show-list-editor-wrapper {
+  margin: 1em 0;
+}
+
+.wp-block-biederman-show-list-editor {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.wp-block-biederman-show-list-editor__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+
+.wp-block-biederman-show-list-editor__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #2271b1;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.wp-block-biederman-show-list-editor__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.wp-block-biederman-show-list-editor__title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wp-block-biederman-show-list-editor__title strong {
+  font-size: 14px;
+  color: #1d2327;
+}
+
+.wp-block-biederman-show-list-editor__subtitle {
+  font-size: 12px;
+  color: #646970;
+}
+
+.wp-block-biederman-show-list-editor__loading,
+.wp-block-biederman-show-list-editor__content {
+  padding: 16px;
+}
+
+.wp-block-biederman-show-list-editor__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #646970;
+}
+
+.wp-block-biederman-show-list-editor__spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #2271b1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.wp-block-biederman-show-list-editor__empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: #646970;
+}
+
+.wp-block-biederman-show-list-editor__empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.wp-block-biederman-show-list-editor__empty h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #1d2327;
+}
+
+.wp-block-biederman-show-list-editor__empty p {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+}
+
+.wp-block-biederman-show-list-editor__empty-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #2271b1;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.wp-block-biederman-show-list-editor__empty-link:hover {
+  background: #135e96;
+  color: #fff;
+}
+

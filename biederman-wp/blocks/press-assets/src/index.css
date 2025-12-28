@@ -1,0 +1,172 @@
+/**
+ * Press Assets Block - Editor Styles
+ */
+
+.wp-block-biederman-press-assets-editor-wrapper {
+  margin: 1.5rem 0;
+}
+
+.wp-block-biederman-press-assets-editor {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.wp-block-biederman-press-assets-editor:hover {
+  border-color: #2271b1;
+  box-shadow: 0 2px 8px rgba(34, 113, 177, 0.1);
+}
+
+.wp-block-biederman-press-assets-editor__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.wp-block-biederman-press-assets-editor__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #2271b1;
+  border-radius: 8px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.wp-block-biederman-press-assets-editor__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wp-block-biederman-press-assets-editor__title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wp-block-biederman-press-assets-editor__title strong {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d2327;
+  line-height: 1.4;
+}
+
+.wp-block-biederman-press-assets-editor__subtitle {
+  font-size: 13px;
+  color: #646970;
+  line-height: 1.4;
+}
+
+.wp-block-biederman-press-assets-editor__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+.wp-block-biederman-press-assets-editor__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #2271b1;
+  border-radius: 50%;
+  animation: biederman-spin 0.8s linear infinite;
+}
+
+@keyframes biederman-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wp-block-biederman-press-assets-editor__loading p {
+  margin: 0;
+  font-size: 14px;
+  color: #646970;
+}
+
+.wp-block-biederman-press-assets-editor__content {
+  padding: 20px;
+  min-height: 100px;
+}
+
+.wp-block-biederman-press-assets-editor__empty {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 2px dashed #c3c4c7;
+}
+
+.wp-block-biederman-press-assets-editor__empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.wp-block-biederman-press-assets-editor__empty h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d2327;
+}
+
+.wp-block-biederman-press-assets-editor__empty p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #646970;
+  line-height: 1.6;
+}
+
+.wp-block-biederman-press-assets-editor__empty-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #2271b1;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.wp-block-biederman-press-assets-editor__empty-link:hover {
+  background: #135e96;
+  color: #ffffff;
+}
+
+/* Cards grid in editor */
+.wp-block-biederman-press-assets-editor__content .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0;
+}
+
+/* Settings panel improvements */
+.biederman-block-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.biederman-block-settings__note {
+  margin: 0;
+  padding: 12px;
+  background: #fff3cd;
+  border-left: 3px solid #ffc107;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #856404;
+  line-height: 1.5;
+}

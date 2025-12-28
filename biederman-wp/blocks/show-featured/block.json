@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "biederman/show-featured",
+  "title": "Show Featured",
+  "category": "biederman",
+  "icon": "star-filled",
+  "description": "Display the featured show (or next upcoming show if no featured show is set).",
+  "keywords": ["show", "featured", "event", "next"],
+  "textdomain": "biederman",
+  "attributes": {},
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "render": "file:./render.php"
+}
+

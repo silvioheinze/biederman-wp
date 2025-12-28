@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "biederman/show-list",
+  "title": "Show List",
+  "category": "biederman",
+  "icon": "calendar-alt",
+  "description": "Display a list of shows from the Shows custom post type.",
+  "keywords": ["shows", "list", "events", "concerts"],
+  "textdomain": "biederman",
+  "attributes": {
+    "limit": {
+      "type": "number",
+      "default": 5
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "render": "file:./render.php"
+}
+

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "biederman/hero",
+  "title": "Hero",
+  "category": "biederman",
+  "icon": "cover-image",
+  "description": "Display a hero section with tagline, title, lead text, buttons, chips, and image.",
+  "keywords": ["hero", "banner", "header", "intro"],
+  "textdomain": "biederman",
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "lead": {
+      "type": "string",
+      "default": ""
+    },
+    "primaryButtonText": {
+      "type": "string",
+      "default": "Nächster Gig"
+    },
+    "primaryButtonLink": {
+      "type": "string",
+      "default": "#shows"
+    },
+    "secondaryButtonText": {
+      "type": "string",
+      "default": "Reinhören"
+    },
+    "secondaryButtonLink": {
+      "type": "string",
+      "default": "#media"
+    },
+    "chips": {
+      "type": "array",
+      "default": []
+    },
+    "imageId": {
+      "type": "number",
+      "default": 0
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "imageCaption": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "render": "file:./render.php"
+}
+

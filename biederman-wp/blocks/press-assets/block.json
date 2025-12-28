@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "biederman/press-assets",
+  "title": "Press Assets",
+  "category": "biederman",
+  "icon": "media-document",
+  "description": "Display press assets from the Press Assets custom post type.",
+  "keywords": ["press", "assets", "downloads", "media"],
+  "textdomain": "biederman",
+  "attributes": {
+    "type": {
+      "type": "string",
+      "default": ""
+    },
+    "limit": {
+      "type": "number",
+      "default": -1
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "render": "file:./render.php"
+}
+

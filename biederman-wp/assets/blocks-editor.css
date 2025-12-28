@@ -1,0 +1,30 @@
+/**
+ * Block Editor Styles
+ */
+
+/* Hero block style */
+.wp-block-group.is-style-hero {
+  padding: 2rem 0;
+}
+
+/* Section block styles */
+.wp-block-group.is-style-section {
+  padding: 3rem 0;
+}
+
+.wp-block-group.is-style-section-alt {
+  padding: 3rem 0;
+  background-color: var(--wp--preset--color--bg, #0b0f12);
+}
+
+/* Cards columns style */
+.wp-block-columns.is-style-cards .wp-block-column {
+  margin-bottom: 1.5rem;
+}
+
+/* Primary button style */
+.wp-block-button.is-style-primary .wp-block-button__link {
+  background-color: var(--wp--preset--color--accent, #e0206a);
+  color: var(--wp--preset--color--text, #f3f5f7);
+}
+
