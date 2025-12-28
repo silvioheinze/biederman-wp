@@ -1,14 +1,8 @@
 name: Build WordPress Theme
 
 on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+  release:
+    types: [created]
   workflow_dispatch:
 
 jobs:
@@ -26,9 +20,16 @@ jobs:
           cache: 'npm'
           cache-dependency-path: biederman-wp/package-lock.json
       
-      - name: Install dependencies
+      - name: Check for package-lock.json
         working-directory: ./biederman-wp
-        run: npm ci
+        run: |
+          if [ ! -f package-lock.json ]; then
+            echo "package-lock.json not found, running npm install"
+            npm install
+          else
+            echo "package-lock.json found, running npm ci"
+            npm ci
+          fi
       
       - name: Build blocks
         working-directory: ./biederman-wp
@@ -37,17 +38,17 @@ jobs:
       - name: Copy CSS files to build directories
         working-directory: ./biederman-wp
         run: |
-          mkdir -p blocks/hero/build blocks/show-featured/build blocks/show-list/build blocks/epk-assets/build blocks/social-links/build blocks/booking-email/build
+          mkdir -p blocks/hero/build blocks/show-featured/build blocks/show-list/build blocks/press-assets/build blocks/social-links/build blocks/booking-email/build
           [ -f blocks/hero/src/index.css ] && cp blocks/hero/src/index.css blocks/hero/build/ || true
           [ -f blocks/hero/src/style-index.css ] && cp blocks/hero/src/style-index.css blocks/hero/build/ || true
           [ -f blocks/show-featured/src/index.css ] && cp blocks/show-featured/src/index.css blocks/show-featured/build/ || true
           [ -f blocks/show-list/src/index.css ] && cp blocks/show-list/src/index.css blocks/show-list/build/ || true
-          [ -f blocks/epk-assets/src/index.css ] && cp blocks/epk-assets/src/index.css blocks/epk-assets/build/ || true
+          [ -f blocks/press-assets/src/index.css ] && cp blocks/press-assets/src/index.css blocks/press-assets/build/ || true
           [ -f blocks/social-links/src/index.css ] && cp blocks/social-links/src/index.css blocks/social-links/build/ || true
           [ -f blocks/booking-email/src/index.css ] && cp blocks/booking-email/src/index.css blocks/booking-email/build/ || true
           [ -f blocks/show-featured/src/style-index.css ] && cp blocks/show-featured/src/style-index.css blocks/show-featured/build/ || true
           [ -f blocks/show-list/src/style-index.css ] && cp blocks/show-list/src/style-index.css blocks/show-list/build/ || true
-          [ -f blocks/epk-assets/src/style-index.css ] && cp blocks/epk-assets/src/style-index.css blocks/epk-assets/build/ || true
+          [ -f blocks/press-assets/src/style-index.css ] && cp blocks/press-assets/src/style-index.css blocks/press-assets/build/ || true
       
       - name: Create theme ZIP
         working-directory: ./
@@ -78,4 +79,14 @@ jobs:
           name: biederman-wp-theme
           path: biederman-wp-theme.zip
           retention-days: 30
+      
+      - name: Create GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: biederman-wp-theme.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
