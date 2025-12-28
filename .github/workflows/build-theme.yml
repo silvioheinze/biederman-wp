@@ -83,12 +83,14 @@ jobs:
       
       - name: Upload to GitHub Release
         if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: biederman-wp-theme.zip
-          tag_name: ${{ github.event.release.tag_name }}
-          draft: false
-          prerelease: ${{ github.event.release.prerelease }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE_ID=${{ github.event.release.id }}
+          UPLOAD_URL="${{ github.event.release.upload_url }}"
+          UPLOAD_URL="${UPLOAD_URL%\{*}"
+          
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/zip" \
+            --data-binary "@biederman-wp-theme.zip" \
+            "$UPLOAD_URL?name=biederman-wp-theme.zip&label=biederman-wp-theme.zip"
 
