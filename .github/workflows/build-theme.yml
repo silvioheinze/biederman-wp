@@ -38,9 +38,9 @@ jobs:
         working-directory: ./biederman-wp
         run: npm run build
       
-          - name: Copy CSS files to build directories
-            working-directory: ./biederman-wp
-            run: |
+      - name: Copy CSS files to build directories
+        working-directory: ./biederman-wp
+        run: |
               mkdir -p blocks/hero/build blocks/show-featured/build blocks/show-list/build blocks/press-assets/build blocks/social-links/build blocks/contact-form/build blocks/facts/build
               [ -f blocks/hero/src/index.css ] && cp blocks/hero/src/index.css blocks/hero/build/ || true
               [ -f blocks/hero/src/style-index.css ] && cp blocks/hero/src/style-index.css blocks/hero/build/ || true
