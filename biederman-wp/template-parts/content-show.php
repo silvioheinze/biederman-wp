@@ -50,6 +50,20 @@ $is_featured = get_post_meta(get_the_ID(), 'show_is_featured', true);
         <?php esc_html_e('Route', 'biederman'); ?>
       </a>
     <?php endif; ?>
+    <?php if ($is_featured && $show_date): ?>
+      <button class="button btn-ics-featured" 
+              type="button" 
+              data-show-title="<?php echo esc_attr(get_the_title()); ?>"
+              data-show-date="<?php echo esc_attr($show_date); ?>"
+              data-show-location="<?php echo esc_attr($show_venue ? $show_venue . ', ' . $show_location : $show_location); ?>"
+              data-show-description="<?php echo esc_attr(get_the_excerpt() ?: get_the_title()); ?>"
+              data-show-url="<?php echo esc_url($show_ticket_url ?: get_permalink()); ?>">
+        <?php esc_html_e('In Kalender', 'biederman'); ?>
+      </button>
+    <?php endif; ?>
   </div>
+  <?php if ($is_featured && $show_date): ?>
+    <p class="small muted show-ics-msg" role="status" aria-live="polite"></p>
+  <?php endif; ?>
 </article>
 

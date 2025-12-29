@@ -173,6 +173,67 @@ function initNewsletter(){
   });
 }
 
+function initFeaturedShowICS(){
+  // Handle ICS export for featured shows
+  const btnICSFeatured = document.querySelectorAll('.btn-ics-featured');
+  btnICSFeatured.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const title = btn.dataset.showTitle || 'Biederman Show';
+      const dateStr = btn.dataset.showDate || '';
+      const location = btn.dataset.showLocation || '';
+      const description = btn.dataset.showDescription || title;
+      const url = btn.dataset.showUrl || window.location.href;
+      
+      // Parse date string (format: YYYY-MM-DD HH:MM:SS or YYYY-MM-DDTHH:MM)
+      let startDate;
+      if (dateStr) {
+        // Try ISO format first (YYYY-MM-DDTHH:MM)
+        if (dateStr.includes('T')) {
+          startDate = new Date(dateStr);
+        } else {
+          // Try MySQL datetime format (YYYY-MM-DD HH:MM:SS)
+          startDate = new Date(dateStr.replace(' ', 'T'));
+        }
+      } else {
+        startDate = new Date();
+      }
+      
+      // Validate date
+      if (isNaN(startDate.getTime())) {
+        const msgEl = btn.closest('.card')?.querySelector('.show-ics-msg');
+        if (msgEl) {
+          toast(msgEl, 'Ungültiges Datum.');
+        }
+        return;
+      }
+      
+      // Default duration: 150 minutes (2.5 hours)
+      const durationMinutes = 150;
+      
+      const ics = makeICS({
+        title: title,
+        start: startDate,
+        durationMinutes: durationMinutes,
+        location: location,
+        description: description,
+        url: url
+      });
+      
+      // Generate filename from title and date
+      const dateStrForFilename = startDate.toISOString().split('T')[0];
+      const filename = `biederman-${dateStrForFilename}.ics`;
+      
+      download(filename, ics, 'text/calendar;charset=utf-8');
+      
+      const msgEl = btn.closest('.card')?.querySelector('.show-ics-msg');
+      if (msgEl) {
+        toast(msgEl, 'Kalenderdatei heruntergeladen (.ics).');
+      }
+    });
+  });
+}
+
 initNav();
 initActions();
 initNewsletter();
+initFeaturedShowICS();
