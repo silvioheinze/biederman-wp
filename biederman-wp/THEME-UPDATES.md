@@ -48,6 +48,30 @@ WordPress prüft automatisch auf Updates:
 - Alle 12 Stunden automatisch
 - Manuell über **Design → Themes** → "Nach Updates suchen"
 
+### Manuelle Update-Prüfung
+
+Falls Updates nicht automatisch angezeigt werden, kannst du die Prüfung manuell anstoßen:
+
+**Option 1: Über WordPress Admin**
+1. Gehe zu **Design → Themes**
+2. Klicke auf den Button **"Nach Updates suchen"** neben dem Theme
+3. Die Seite wird neu geladen und zeigt verfügbare Updates an
+
+**Option 2: Cache manuell leeren (WP-CLI)**
+```bash
+wp transient delete biederman_latest_release
+wp transient delete update_themes
+wp theme update-check
+```
+
+**Option 3: Cache manuell leeren (PHP)**
+Füge diesen Code temporär in `functions.php` ein oder führe ihn über WP-CLI aus:
+```php
+delete_transient('biederman_latest_release');
+delete_site_transient('update_themes');
+wp_update_themes();
+```
+
 ## Konfiguration
 
 Die Update-Konfiguration befindet sich in `inc/theme-updater.php`:

@@ -32,6 +32,12 @@ function biederman_theme_updater_init() {
     
     // Add update action
     add_action('upgrader_process_complete', 'biederman_after_theme_update', 10, 2);
+    
+    // Add manual update check action
+    add_action('admin_post_biederman_check_updates', 'biederman_manual_update_check');
+    
+    // Add admin notice for manual check
+    add_action('admin_notices', 'biederman_update_check_notice');
 }
 add_action('admin_init', 'biederman_theme_updater_init');
 
@@ -192,4 +198,77 @@ function biederman_after_theme_update($upgrader, $hook_extra) {
     // Clear WordPress update cache
     delete_site_transient('update_themes');
 }
+
+/**
+ * Manual update check
+ */
+function biederman_manual_update_check() {
+    // Check nonce
+    if (!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], 'biederman_check_updates')) {
+        wp_die(__('Security check failed', 'biederman'));
+    }
+    
+    // Check user capabilities
+    if (!current_user_can('update_themes')) {
+        wp_die(__('You do not have permission to check for updates', 'biederman'));
+    }
+    
+    // Clear caches
+    delete_transient('biederman_latest_release');
+    delete_site_transient('update_themes');
+    
+    // Force update check
+    wp_update_themes();
+    
+    // Redirect back to themes page
+    wp_redirect(admin_url('themes.php?biederman_update_checked=1'));
+    exit;
+}
+
+/**
+ * Admin notice for update check
+ */
+function biederman_update_check_notice() {
+    if (!isset($_GET['biederman_update_checked'])) {
+        return;
+    }
+    
+    $screen = get_current_screen();
+    if ($screen && $screen->id === 'themes') {
+        ?>
+        <div class="notice notice-success is-dismissible">
+            <p><?php esc_html_e('Update check completed. Please refresh the page to see if updates are available.', 'biederman'); ?></p>
+        </div>
+        <?php
+    }
+}
+
+/**
+ * Add manual update check button to themes page
+ */
+function biederman_add_update_check_button($theme) {
+    if ($theme->get_stylesheet() !== get_template()) {
+        return;
+    }
+    
+    $check_url = wp_nonce_url(
+        admin_url('admin-post.php?action=biederman_check_updates'),
+        'biederman_check_updates'
+    );
+    
+    ?>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        var checkButton = $('<a>')
+            .attr('href', '<?php echo esc_js($check_url); ?>')
+            .addClass('button')
+            .text('<?php esc_html_e('Nach Updates suchen', 'biederman'); ?>')
+            .css('margin-left', '10px');
+        
+        $('.theme-actions .button-primary').after(checkButton);
+    });
+    </script>
+    <?php
+}
+add_action('admin_footer-themes.php', 'biederman_add_update_check_button');
 
