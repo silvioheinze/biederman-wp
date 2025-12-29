@@ -145,3 +145,7 @@ You can customize the setup by modifying the environment variables in `docker-co
 - Theme files in `biederman-wp/` are mounted directly, so changes are immediate
 - To reset everything, run `docker-compose down -v` (this will delete all data)
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
