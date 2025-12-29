@@ -64,17 +64,25 @@ add_action('init', 'biederman_register_press_assets_block');
  * Render Press Assets block (server-side)
  */
 function biederman_render_press_assets_block($attributes, $content, $block) {
+  // Make $block available to render.php
+  global $biederman_current_block;
+  $biederman_current_block = $block;
+  
   $type = isset($attributes['type']) ? $attributes['type'] : '';
   $limit = isset($attributes['limit']) ? intval($attributes['limit']) : -1;
   
   $query = biederman_get_press_assets($type);
   
-  if (!$query->have_posts()) {
+  // Get block wrapper attributes
+  if (isset($biederman_current_block) && function_exists('get_block_wrapper_attributes')) {
     $wrapper_attributes = get_block_wrapper_attributes();
-    return '<div ' . $wrapper_attributes . '><p class="muted">' . esc_html__('Keine Press Assets gefunden.', 'biederman') . '</p></div>';
+  } else {
+    $wrapper_attributes = 'class="wp-block-biederman-press-assets"';
   }
   
-  $wrapper_attributes = get_block_wrapper_attributes();
+  if (!$query->have_posts()) {
+    return '<div ' . $wrapper_attributes . '><p class="muted">' . esc_html__('Keine Press Assets gefunden.', 'biederman') . '</p></div>';
+  }
   
   ob_start();
   echo '<ul ' . $wrapper_attributes . ' class="list" style="list-style: none; padding-left: 0;">';
@@ -116,6 +124,8 @@ function biederman_render_press_assets_block($attributes, $content, $block) {
   echo '</ul>';
   wp_reset_postdata();
   
-  return ob_get_clean();
+  $output = ob_get_clean();
+  $biederman_current_block = null;
+  return $output;
 }
 

@@ -58,18 +58,25 @@ add_action('init', 'biederman_register_contact_form_block');
  * Render Contact Form block (server-side)
  */
 function biederman_render_contact_form_block($attributes, $content, $block) {
+  // Make $block available to render.php
+  global $biederman_current_block;
+  $biederman_current_block = $block;
+  
   // Clear any potential caching
   clearstatcache();
   
   $render_file = get_template_directory() . '/blocks/contact-form/render.php';
   
   if (!file_exists($render_file)) {
+    $biederman_current_block = null;
     return '<p>' . esc_html__('Contact form template not found.', 'biederman') . '</p>';
   }
   
   ob_start();
   include $render_file;
-  return ob_get_clean();
+  $output = ob_get_clean();
+  $biederman_current_block = null;
+  return $output;
 }
 
 /**

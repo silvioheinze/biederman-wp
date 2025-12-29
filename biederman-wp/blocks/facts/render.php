@@ -5,7 +5,15 @@
 
 if (!defined('ABSPATH')) { exit; }
 
-$wrapper_attributes = get_block_wrapper_attributes();
+// Get block wrapper attributes
+global $biederman_current_block;
+if (isset($biederman_current_block) && function_exists('get_block_wrapper_attributes')) {
+  $wrapper_attributes = get_block_wrapper_attributes();
+} else {
+  // Fallback if get_block_wrapper_attributes is not available
+  $wrapper_attributes = 'class="wp-block-biederman-facts"';
+}
+
 $facts = isset($attributes['facts']) ? $attributes['facts'] : array();
 
 if (empty($facts)) {

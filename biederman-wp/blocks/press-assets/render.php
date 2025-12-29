@@ -7,7 +7,15 @@ if (!defined('ABSPATH')) { exit; }
 
 $type = isset($attributes['type']) ? $attributes['type'] : '';
 $limit = isset($attributes['limit']) ? intval($attributes['limit']) : -1;
-$wrapper_attributes = get_block_wrapper_attributes();
+
+// Get block wrapper attributes
+global $biederman_current_block;
+if (isset($biederman_current_block) && function_exists('get_block_wrapper_attributes')) {
+  $wrapper_attributes = get_block_wrapper_attributes();
+} else {
+  // Fallback if get_block_wrapper_attributes is not available
+  $wrapper_attributes = 'class="wp-block-biederman-press-assets"';
+}
 
 $query = biederman_get_press_assets($type);
 

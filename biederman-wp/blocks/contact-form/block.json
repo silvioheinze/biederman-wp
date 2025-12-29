@@ -12,6 +12,5 @@
   "supports": {
     "html": false,
     "align": false
-  },
-  "render": "file:./render.php"
+  }
 }

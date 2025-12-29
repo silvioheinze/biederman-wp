@@ -54,7 +54,11 @@ function biederman_template_import_page() {
     $front_page_edit_link = $front_page_id ? get_edit_post_link($front_page_id) : '#';
 
     // Check if template file exists
-    $template_file = get_template_directory() . '/templates/front-page.html';
+    // Try backup file first, then original
+    $template_file = get_template_directory() . '/templates/front-page.html.backup';
+    if (!file_exists($template_file)) {
+      $template_file = get_template_directory() . '/templates/front-page.html';
+    }
     $template_exists = file_exists($template_file);
     $template_size = $template_exists ? filesize($template_file) : 0;
     $template_modified = $template_exists ? filemtime($template_file) : 0;
@@ -186,7 +190,11 @@ function biederman_import_template_content() {
     }
 
     // Check if template file exists
-    $template_file = get_template_directory() . '/templates/front-page.html';
+    // Try backup file first, then original
+    $template_file = get_template_directory() . '/templates/front-page.html.backup';
+    if (!file_exists($template_file)) {
+      $template_file = get_template_directory() . '/templates/front-page.html';
+    }
     if (!file_exists($template_file)) {
         return array(
             'success' => false,
@@ -252,7 +260,11 @@ function biederman_register_template_as_pattern() {
     }
 
     // Check if template file exists
-    $template_file = get_template_directory() . '/templates/front-page.html';
+    // Try backup file first, then original
+    $template_file = get_template_directory() . '/templates/front-page.html.backup';
+    if (!file_exists($template_file)) {
+      $template_file = get_template_directory() . '/templates/front-page.html';
+    }
     if (!file_exists($template_file)) {
         return array(
             'success' => false,
@@ -351,7 +363,11 @@ function biederman_create_reusable_block_from_template() {
     }
 
     // Check if template file exists
-    $template_file = get_template_directory() . '/templates/front-page.html';
+    // Try backup file first, then original
+    $template_file = get_template_directory() . '/templates/front-page.html.backup';
+    if (!file_exists($template_file)) {
+      $template_file = get_template_directory() . '/templates/front-page.html';
+    }
     if (!file_exists($template_file)) {
         return array(
             'success' => false,

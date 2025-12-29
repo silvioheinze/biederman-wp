@@ -58,9 +58,16 @@ add_action('init', 'biederman_register_show_featured_block', 20);
 /**
  * Render Show Featured block (server-side)
  */
-function biederman_render_show_featured_block($attributes) {
+function biederman_render_show_featured_block($attributes, $content, $block) {
+  // Make $block available to render.php
+  global $biederman_current_block;
+  $biederman_current_block = $block;
+  
   ob_start();
   include get_template_directory() . '/blocks/show-featured/render.php';
-  return ob_get_clean();
+  $output = ob_get_clean();
+  
+  $biederman_current_block = null;
+  return $output;
 }
 

@@ -61,13 +61,20 @@ add_action('init', 'biederman_register_social_links_block');
 /**
  * Render Social Links block (server-side)
  */
-function biederman_render_social_links_block($attributes, $content) {
+function biederman_render_social_links_block($attributes, $content, $block) {
+  // Make $block available to render.php
+  global $biederman_current_block;
+  $biederman_current_block = $block;
+  
   $block_path = get_template_directory() . '/blocks/social-links';
   if (file_exists($block_path . '/render.php')) {
     ob_start();
     include $block_path . '/render.php';
-    return ob_get_clean();
+    $output = ob_get_clean();
+    $biederman_current_block = null;
+    return $output;
   }
+  $biederman_current_block = null;
   return '';
 }
 
