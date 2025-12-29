@@ -98,6 +98,48 @@ function biederman_register_press_asset_post_type() {
 add_action('init', 'biederman_register_press_asset_post_type');
 
 /**
+ * Register Contact Submission custom post type
+ */
+function biederman_register_contact_submission_post_type() {
+  $labels = array(
+    'name'                  => _x('Contact Submissions', 'Post type general name', 'biederman'),
+    'singular_name'         => _x('Contact Submission', 'Post type singular name', 'biederman'),
+    'menu_name'             => _x('Contact Submissions', 'Admin Menu text', 'biederman'),
+    'name_admin_bar'        => _x('Contact Submission', 'Add New on Toolbar', 'biederman'),
+    'add_new'               => __('Add New', 'biederman'),
+    'add_new_item'          => __('Add New Contact Submission', 'biederman'),
+    'new_item'              => __('New Contact Submission', 'biederman'),
+    'edit_item'             => __('View Submission', 'biederman'),
+    'view_item'             => __('View Submission', 'biederman'),
+    'all_items'             => __('All Submissions', 'biederman'),
+    'search_items'          => __('Search Submissions', 'biederman'),
+    'not_found'             => __('No submissions found.', 'biederman'),
+    'not_found_in_trash'    => __('No submissions found in Trash.', 'biederman'),
+  );
+
+  $args = array(
+    'labels'             => $labels,
+    'public'             => false,
+    'publicly_queryable' => false,
+    'show_ui'            => true,
+    'show_in_menu'       => true,
+    'query_var'          => false,
+    'rewrite'            => false,
+    'capability_type'    => 'post',
+    'has_archive'        => false,
+    'hierarchical'       => false,
+    'menu_position'      => 7,
+    'menu_icon'          => 'dashicons-email-alt',
+    'show_in_rest'       => false,
+    'supports'           => array('title', 'editor'),
+    'template_lock'      => false,
+  );
+
+  register_post_type('contact_submission', $args);
+}
+add_action('init', 'biederman_register_contact_submission_post_type');
+
+/**
  * Add custom meta fields for Shows
  */
 function biederman_register_show_meta() {
@@ -256,4 +298,42 @@ function biederman_sort_shows_by_date($query) {
   }
 }
 add_action('pre_get_posts', 'biederman_sort_shows_by_date');
+
+/**
+ * Add custom columns to Contact Submissions admin list
+ */
+function biederman_add_contact_submission_admin_columns($columns) {
+  $new_columns = array();
+  foreach ($columns as $key => $value) {
+    $new_columns[$key] = $value;
+    if ($key === 'title') {
+      $new_columns['contact_email'] = __('Email', 'biederman');
+      $new_columns['contact_date'] = __('Date', 'biederman');
+    }
+  }
+  return $new_columns;
+}
+add_filter('manage_contact_submission_posts_columns', 'biederman_add_contact_submission_admin_columns');
+
+/**
+ * Populate custom columns in Contact Submissions admin list
+ */
+function biederman_populate_contact_submission_admin_columns($column, $post_id) {
+  switch ($column) {
+    case 'contact_email':
+      $email = get_post_meta($post_id, 'contact_email', true);
+      if ($email) {
+        echo '<a href="mailto:' . esc_attr($email) . '">' . esc_html($email) . '</a>';
+      } else {
+        echo '<span style="color: #999;">—</span>';
+      }
+      break;
+    
+    case 'contact_date':
+      $date = get_the_date('Y-m-d H:i', $post_id);
+      echo esc_html($date);
+      break;
+  }
+}
+add_action('manage_contact_submission_posts_custom_column', 'biederman_populate_contact_submission_admin_columns', 10, 2);
 

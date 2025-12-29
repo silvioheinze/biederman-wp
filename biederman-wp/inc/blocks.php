@@ -28,8 +28,9 @@ require_once get_template_directory() . '/inc/blocks/hero-block.php';
 require_once get_template_directory() . '/inc/blocks/show-featured-block.php';
 require_once get_template_directory() . '/inc/blocks/show-list-block.php';
 require_once get_template_directory() . '/inc/blocks/press-assets-block.php';
+require_once get_template_directory() . '/inc/blocks/contact-form-block.php';
+require_once get_template_directory() . '/inc/blocks/facts-block.php';
 require_once get_template_directory() . '/inc/blocks/social-links-block.php';
-require_once get_template_directory() . '/inc/blocks/booking-email-block.php';
 
 /**
  * Register custom blocks

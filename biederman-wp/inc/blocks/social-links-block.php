@@ -44,6 +44,16 @@ function biederman_register_social_links_block() {
     );
   }
   
+  if (file_exists($build_path . '/style-index.css')) {
+    $block_args['style'] = 'biederman-social-links-block-style';
+    wp_register_style(
+      'biederman-social-links-block-style',
+      get_template_directory_uri() . '/blocks/social-links/build/style-index.css',
+      array(),
+      wp_get_theme()->get('Version')
+    );
+  }
+  
   register_block_type($block_path, $block_args);
 }
 add_action('init', 'biederman_register_social_links_block');

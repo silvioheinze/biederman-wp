@@ -38,20 +38,24 @@ jobs:
         working-directory: ./biederman-wp
         run: npm run build
       
-      - name: Copy CSS files to build directories
-        working-directory: ./biederman-wp
-        run: |
-          mkdir -p blocks/hero/build blocks/show-featured/build blocks/show-list/build blocks/press-assets/build blocks/social-links/build blocks/booking-email/build
-          [ -f blocks/hero/src/index.css ] && cp blocks/hero/src/index.css blocks/hero/build/ || true
-          [ -f blocks/hero/src/style-index.css ] && cp blocks/hero/src/style-index.css blocks/hero/build/ || true
-          [ -f blocks/show-featured/src/index.css ] && cp blocks/show-featured/src/index.css blocks/show-featured/build/ || true
-          [ -f blocks/show-list/src/index.css ] && cp blocks/show-list/src/index.css blocks/show-list/build/ || true
-          [ -f blocks/press-assets/src/index.css ] && cp blocks/press-assets/src/index.css blocks/press-assets/build/ || true
-          [ -f blocks/social-links/src/index.css ] && cp blocks/social-links/src/index.css blocks/social-links/build/ || true
-          [ -f blocks/booking-email/src/index.css ] && cp blocks/booking-email/src/index.css blocks/booking-email/build/ || true
-          [ -f blocks/show-featured/src/style-index.css ] && cp blocks/show-featured/src/style-index.css blocks/show-featured/build/ || true
-          [ -f blocks/show-list/src/style-index.css ] && cp blocks/show-list/src/style-index.css blocks/show-list/build/ || true
-          [ -f blocks/press-assets/src/style-index.css ] && cp blocks/press-assets/src/style-index.css blocks/press-assets/build/ || true
+          - name: Copy CSS files to build directories
+            working-directory: ./biederman-wp
+            run: |
+              mkdir -p blocks/hero/build blocks/show-featured/build blocks/show-list/build blocks/press-assets/build blocks/social-links/build blocks/contact-form/build blocks/facts/build
+              [ -f blocks/hero/src/index.css ] && cp blocks/hero/src/index.css blocks/hero/build/ || true
+              [ -f blocks/hero/src/style-index.css ] && cp blocks/hero/src/style-index.css blocks/hero/build/ || true
+              [ -f blocks/show-featured/src/index.css ] && cp blocks/show-featured/src/index.css blocks/show-featured/build/ || true
+              [ -f blocks/show-list/src/index.css ] && cp blocks/show-list/src/index.css blocks/show-list/build/ || true
+              [ -f blocks/press-assets/src/index.css ] && cp blocks/press-assets/src/index.css blocks/press-assets/build/ || true
+              [ -f blocks/social-links/src/index.css ] && cp blocks/social-links/src/index.css blocks/social-links/build/ || true
+              [ -f blocks/social-links/src/style-index.css ] && cp blocks/social-links/src/style-index.css blocks/social-links/build/ || true
+              [ -f blocks/contact-form/src/index.css ] && cp blocks/contact-form/src/index.css blocks/contact-form/build/ || true
+              [ -f blocks/facts/src/index.css ] && cp blocks/facts/src/index.css blocks/facts/build/ || true
+              [ -f blocks/facts/src/style-index.css ] && cp blocks/facts/src/style-index.css blocks/facts/build/ || true
+              [ -f blocks/show-featured/src/style-index.css ] && cp blocks/show-featured/src/style-index.css blocks/show-featured/build/ || true
+              [ -f blocks/show-list/src/style-index.css ] && cp blocks/show-list/src/style-index.css blocks/show-list/build/ || true
+              [ -f blocks/press-assets/src/style-index.css ] && cp blocks/press-assets/src/style-index.css blocks/press-assets/build/ || true
+              [ -f blocks/contact-form/src/style-index.css ] && cp blocks/contact-form/src/style-index.css blocks/contact-form/build/ || true
       
       - name: Extract version from tag
         if: github.event_name == 'release'

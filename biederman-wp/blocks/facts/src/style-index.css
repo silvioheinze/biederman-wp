@@ -1,0 +1,38 @@
+.facts {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.fact {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.7rem;
+}
+
+.fact__k {
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.fact__v {
+  font-weight: 700;
+  margin-top: 0.15rem;
+  color: var(--text);
+  flex: 1;
+}
+
+.fact__v .textlink {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.2s ease;
+}
+
+.fact__v .textlink:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+

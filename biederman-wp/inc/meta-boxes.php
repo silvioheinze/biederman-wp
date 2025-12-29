@@ -238,3 +238,86 @@ function biederman_save_press_asset_meta($post_id) {
 }
 add_action('save_post', 'biederman_save_press_asset_meta');
 
+/**
+ * Add meta box for Contact Submission fields
+ */
+function biederman_add_contact_submission_meta_box() {
+  add_meta_box(
+    'biederman_contact_submission_details',
+    __('Contact Details', 'biederman'),
+    'biederman_contact_submission_meta_box_callback',
+    'contact_submission',
+    'normal',
+    'high'
+  );
+}
+add_action('add_meta_boxes', 'biederman_add_contact_submission_meta_box');
+
+/**
+ * Contact Submission meta box callback
+ */
+function biederman_contact_submission_meta_box_callback($post) {
+  $contact_name = get_post_meta($post->ID, 'contact_name', true);
+  $contact_email = get_post_meta($post->ID, 'contact_email', true);
+  $contact_message = get_post_meta($post->ID, 'contact_message', true);
+  ?>
+  <table class="form-table">
+    <tr>
+      <th><label for="contact_name"><?php _e('Name', 'biederman'); ?></label></th>
+      <td>
+        <input type="text" id="contact_name" name="contact_name" value="<?php echo esc_attr($contact_name); ?>" class="regular-text" readonly />
+      </td>
+    </tr>
+    <tr>
+      <th><label for="contact_email"><?php _e('Email', 'biederman'); ?></label></th>
+      <td>
+        <input type="email" id="contact_email" name="contact_email" value="<?php echo esc_attr($contact_email); ?>" class="regular-text" readonly />
+        <?php if ($contact_email): ?>
+          <a href="mailto:<?php echo esc_attr($contact_email); ?>" class="button" style="margin-left: 10px;"><?php _e('Send Email', 'biederman'); ?></a>
+        <?php endif; ?>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="contact_message"><?php _e('Message', 'biederman'); ?></label></th>
+      <td>
+        <textarea id="contact_message" name="contact_message" rows="10" class="large-text" readonly><?php echo esc_textarea($contact_message); ?></textarea>
+      </td>
+    </tr>
+  </table>
+  <?php
+}
+
+/**
+ * Save Contact Submission meta box data
+ */
+function biederman_save_contact_submission_meta($post_id) {
+  // Check autosave
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+    return;
+  }
+  
+  // Check permissions
+  if (!current_user_can('edit_post', $post_id)) {
+    return;
+  }
+  
+  // Check post type
+  if (get_post_type($post_id) !== 'contact_submission') {
+    return;
+  }
+  
+  // Save meta fields (only if not readonly - should not happen for submissions)
+  if (isset($_POST['contact_name'])) {
+    update_post_meta($post_id, 'contact_name', sanitize_text_field($_POST['contact_name']));
+  }
+  
+  if (isset($_POST['contact_email'])) {
+    update_post_meta($post_id, 'contact_email', sanitize_email($_POST['contact_email']));
+  }
+  
+  if (isset($_POST['contact_message'])) {
+    update_post_meta($post_id, 'contact_message', sanitize_textarea_field($_POST['contact_message']));
+  }
+}
+add_action('save_post', 'biederman_save_contact_submission_meta');
+

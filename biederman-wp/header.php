@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) { exit; }
 
 <header class="topbar" id="top">
   <div class="container topbar__inner">
-    <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('Startseite Biederman', 'biederman'); ?>">
+    <a class="brand" href="#top" aria-label="<?php esc_attr_e('Startseite Biederman', 'biederman'); ?>">
       <span class="brand__dot" aria-hidden="true"></span>
       <span class="brand__name"><?php echo esc_html(get_bloginfo('name', 'display')); ?></span>
     </a>

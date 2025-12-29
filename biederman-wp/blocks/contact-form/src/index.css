@@ -1,0 +1,49 @@
+.wp-block-biederman-contact-form-editor-wrapper {
+  margin: 1rem 0;
+}
+
+.wp-block-biederman-contact-form-editor {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.wp-block-biederman-contact-form-editor__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.wp-block-biederman-contact-form-editor__icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2271b1;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.wp-block-biederman-contact-form-editor__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.wp-block-biederman-contact-form-editor__title strong {
+  font-size: 1rem;
+  color: #1d2327;
+}
+
+.wp-block-biederman-contact-form-editor__subtitle {
+  font-size: 0.875rem;
+  color: #646970;
+}
+
+.wp-block-biederman-contact-form-editor__content {
+  margin-top: 0.5rem;
+}
+

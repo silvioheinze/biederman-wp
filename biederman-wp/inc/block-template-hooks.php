@@ -23,7 +23,7 @@ function biederman_output_header_content_for_block_templates() {
     <a class="skip" href="#main"><?php esc_html_e('Zum Inhalt springen', 'biederman'); ?></a>
     <header class="topbar" id="top">
       <div class="container topbar__inner">
-        <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('Startseite Biederman', 'biederman'); ?>">
+        <a class="brand" href="#top" aria-label="<?php esc_attr_e('Startseite Biederman', 'biederman'); ?>">
           <span class="brand__dot" aria-hidden="true"></span>
           <span class="brand__name"><?php echo esc_html(get_bloginfo('name', 'display')); ?></span>
         </a>
@@ -81,7 +81,7 @@ function biederman_output_footer_content_for_block_templates() {
     <footer class="footer">
       <div class="container footer__inner">
         <p class="small muted">© <?php echo esc_html(date('Y')); ?> <?php echo esc_html(get_bloginfo('name', 'display')); ?> · Wien</p>
-        <a class="textlink small" href="#top"><?php esc_html_e('Nach oben ↑', 'biederman'); ?></a>
+        <a class="textlink small" href="#hero"><?php esc_html_e('Nach oben ↑', 'biederman'); ?></a>
       </div>
     </footer>
     <?php

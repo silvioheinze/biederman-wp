@@ -292,8 +292,6 @@
 				<p class="muted">Ersetzt die Platzhalter-Adresse mit eurer echten Booking-Mail (Customizer).</p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:biederman/booking-email /-->
-
 				<!-- wp:biederman/social-links /-->
 			</div>
 			<!-- /wp:column -->

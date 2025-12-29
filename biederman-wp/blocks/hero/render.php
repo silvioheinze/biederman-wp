@@ -47,7 +47,7 @@ if ($image_id > 0) {
 }
 
 ?>
-<div <?php echo $wrapper_attributes; ?> class="hero" aria-label="Hero">
+<div <?php echo $wrapper_attributes; ?> id="hero" class="hero" aria-label="Hero">
   <div class="container hero__grid">
     <div class="hero__copy">
       <?php if (!empty($tagline)): ?>

@@ -13,10 +13,6 @@ $is_featured = get_post_meta(get_the_ID(), 'show_is_featured', true);
 ?>
 
 <article class="card <?php echo $is_featured ? 'card--featured' : ''; ?>" aria-label="<?php echo esc_attr(get_the_title()); ?>">
-  <?php if ($is_featured): ?>
-    <div class="card__badge"><?php esc_html_e('Nächster Gig', 'biederman'); ?></div>
-  <?php endif; ?>
-
   <?php if (has_post_thumbnail()): ?>
     <div class="card__image">
       <?php the_post_thumbnail('medium_large'); ?>
