@@ -137,9 +137,6 @@ function biederman_customize_register($wp_customize) {
     'priority' => 32,
   ));
 
-  $wp_customize->add_setting('biederman_booking_email', array('default'=>'booking@biederman.band','sanitize_callback'=>'sanitize_email'));
-  $wp_customize->add_control('biederman_booking_email', array('label'=>__('Booking email','biederman'),'section'=>'biederman_links','type'=>'text'));
-
   $wp_customize->add_setting('biederman_contact_form_email', array('default'=>'','sanitize_callback'=>'sanitize_email'));
   $wp_customize->add_control('biederman_contact_form_email', array(
     'label'=>__('Contact form notification email','biederman'),
