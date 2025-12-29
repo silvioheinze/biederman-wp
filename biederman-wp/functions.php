@@ -140,6 +140,14 @@ function biederman_customize_register($wp_customize) {
   $wp_customize->add_setting('biederman_booking_email', array('default'=>'booking@biederman.band','sanitize_callback'=>'sanitize_email'));
   $wp_customize->add_control('biederman_booking_email', array('label'=>__('Booking email','biederman'),'section'=>'biederman_links','type'=>'text'));
 
+  $wp_customize->add_setting('biederman_contact_form_email', array('default'=>'','sanitize_callback'=>'sanitize_email'));
+  $wp_customize->add_control('biederman_contact_form_email', array(
+    'label'=>__('Contact form notification email','biederman'),
+    'section'=>'biederman_links',
+    'type'=>'email',
+    'description'=>__('Email address to receive notifications when a new contact form submission is made. Leave empty to disable notifications.', 'biederman')
+  ));
+
   $wp_customize->add_setting('biederman_instagram', array('default'=>'','sanitize_callback'=>'esc_url_raw'));
   $wp_customize->add_control('biederman_instagram', array('label'=>__('Instagram URL','biederman'),'section'=>'biederman_links','type'=>'url'));
 

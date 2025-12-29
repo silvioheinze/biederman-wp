@@ -128,7 +128,42 @@ function biederman_handle_contact_form_submission() {
   update_post_meta($post_id, 'contact_email', $email);
   update_post_meta($post_id, 'contact_message', $message);
   
+  // Send notification email if configured
+  $notification_email = get_theme_mod('biederman_contact_form_email', '');
+  if (!empty($notification_email) && is_email($notification_email)) {
+    biederman_send_contact_form_notification($name, $email, $message, $post_id, $notification_email);
+  }
+  
   wp_send_json_success(array('message' => __('Thank you! Your message has been sent.', 'biederman')));
+}
+
+/**
+ * Send notification email for contact form submission
+ */
+function biederman_send_contact_form_notification($name, $email, $message, $post_id, $to_email) {
+  $site_name = get_bloginfo('name');
+  $site_url = home_url();
+  
+  $subject = sprintf(__('[%s] New Contact Form Submission from %s', 'biederman'), $site_name, $name);
+  
+  $email_body = sprintf(
+    __("You have received a new contact form submission on %s.\n\n", 'biederman'),
+    $site_name
+  );
+  
+  $email_body .= sprintf(__("Name: %s\n", 'biederman'), $name);
+  $email_body .= sprintf(__("Email: %s\n", 'biederman'), $email);
+  $email_body .= sprintf(__("Message:\n%s\n\n", 'biederman'), $message);
+  
+  $email_body .= sprintf(__("---\nView submission in WordPress: %s\n", 'biederman'), admin_url('post.php?post=' . $post_id . '&action=edit'));
+  
+  $headers = array(
+    'Content-Type: text/plain; charset=UTF-8',
+    'From: ' . $site_name . ' <' . get_option('admin_email') . '>',
+    'Reply-To: ' . $name . ' <' . $email . '>',
+  );
+  
+  wp_mail($to_email, $subject, $email_body, $headers);
 }
 add_action('wp_ajax_biederman_submit_contact_form', 'biederman_handle_contact_form_submission');
 add_action('wp_ajax_nopriv_biederman_submit_contact_form', 'biederman_handle_contact_form_submission');
