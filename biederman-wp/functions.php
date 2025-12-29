@@ -23,9 +23,6 @@ require_once get_template_directory() . '/inc/meta-boxes.php';
 // Include block template hooks
 require_once get_template_directory() . '/inc/block-template-hooks.php';
 
-// Include admin template import
-require_once get_template_directory() . '/inc/admin-template-import.php';
-
 // Include theme updater
 require_once get_template_directory() . '/inc/theme-updater.php';
 
