@@ -14,13 +14,14 @@ if (isset($biederman_current_block) && function_exists('get_block_wrapper_attrib
   $wrapper_attributes = 'class="wp-block-biederman-hero"';
 }
 
-$tagline = isset($attributes['tagline']) ? $attributes['tagline'] : '';
-$title = isset($attributes['title']) ? $attributes['title'] : '';
-$lead = isset($attributes['lead']) ? $attributes['lead'] : '';
-$primary_button_text = isset($attributes['primaryButtonText']) ? $attributes['primaryButtonText'] : 'Nächster Gig';
-$primary_button_link = isset($attributes['primaryButtonLink']) ? $attributes['primaryButtonLink'] : '#shows';
-$secondary_button_text = isset($attributes['secondaryButtonText']) ? $attributes['secondaryButtonText'] : 'Reinhören';
-$secondary_button_link = isset($attributes['secondaryButtonLink']) ? $attributes['secondaryButtonLink'] : '#media';
+// Get attributes - check if they are explicitly set and not empty
+$tagline = (isset($attributes['tagline']) && trim($attributes['tagline']) !== '') ? trim($attributes['tagline']) : null;
+$title = (isset($attributes['title']) && trim($attributes['title']) !== '') ? trim($attributes['title']) : null;
+$lead = (isset($attributes['lead']) && trim($attributes['lead']) !== '') ? trim($attributes['lead']) : null;
+$primary_button_text = isset($attributes['primaryButtonText']) && trim($attributes['primaryButtonText']) !== '' ? $attributes['primaryButtonText'] : 'Nächster Gig';
+$primary_button_link = isset($attributes['primaryButtonLink']) && trim($attributes['primaryButtonLink']) !== '' ? $attributes['primaryButtonLink'] : '#shows';
+$secondary_button_text = isset($attributes['secondaryButtonText']) && trim($attributes['secondaryButtonText']) !== '' ? $attributes['secondaryButtonText'] : 'Reinhören';
+$secondary_button_link = isset($attributes['secondaryButtonLink']) && trim($attributes['secondaryButtonLink']) !== '' ? $attributes['secondaryButtonLink'] : '#media';
 $chips = isset($attributes['chips']) && is_array($attributes['chips']) ? $attributes['chips'] : array();
 $image_id = isset($attributes['imageId']) ? intval($attributes['imageId']) : 0;
 $image_url = isset($attributes['imageUrl']) ? $attributes['imageUrl'] : '';
@@ -28,17 +29,17 @@ $image_alt = isset($attributes['imageAlt']) ? $attributes['imageAlt'] : '';
 $image_caption = isset($attributes['imageCaption']) ? $attributes['imageCaption'] : '';
 
 // If no title provided, use site name
-if (empty($title)) {
+if ($title === null || trim($title) === '') {
   $title = get_bloginfo('name', 'display');
 }
 
 // If no tagline provided, use customizer value
-if (empty($tagline)) {
-  $tagline = get_theme_mod('biederman_tagline', 'Die witzigste generationsübergreifende Band');
+if ($tagline === null || trim($tagline) === '') {
+  $tagline = get_bloginfo('description', 'display');
 }
 
 // If no lead provided, use customizer value
-if (empty($lead)) {
+if ($lead === null || trim($lead) === '') {
   $lead = get_theme_mod('biederman_lead', 'Live-Shows, Songs und Geschichten zwischen Generationen – mit Humor, Haltung und Herz.');
 }
 
