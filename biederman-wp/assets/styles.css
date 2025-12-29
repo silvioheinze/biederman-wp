@@ -218,6 +218,17 @@ h1{
   padding: 1.1rem;
   box-shadow: 0 10px 30px rgba(0,0,0,.22);
 }
+.card__image{
+  margin: -1.1rem -1.1rem 1rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+}
+.card__image img{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
 .card--featured{
   position: relative;
   overflow:hidden;
