@@ -15,8 +15,10 @@ function biederman_register_contact_form_block() {
     return;
   }
   
-  // Use block.json render file, but we can still add custom callback if needed
-  $block_args = array();
+  // Use render_callback to render the block
+  $block_args = array(
+    'render_callback' => 'biederman_render_contact_form_block',
+  );
 
   $build_path = $block_path . '/build';
   if (file_exists($build_path . '/index.js')) {
