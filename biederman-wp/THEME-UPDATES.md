@@ -52,24 +52,45 @@ WordPress prüft automatisch auf Updates:
 
 Falls Updates nicht automatisch angezeigt werden, kannst du die Prüfung manuell anstoßen:
 
-**Option 1: Über WordPress Admin**
+**Option 1: Über WordPress Admin (Button)**
 1. Gehe zu **Design → Themes**
-2. Klicke auf den Button **"Nach Updates suchen"** neben dem Theme
-3. Die Seite wird neu geladen und zeigt verfügbare Updates an
+2. Suche nach dem aktiven Biederman Theme
+3. Klicke auf den Link **"Nach Updates suchen"** in den Theme-Aktionen
+4. Die Seite wird neu geladen und zeigt verfügbare Updates an
 
-**Option 2: Cache manuell leeren (WP-CLI)**
+**Option 2: Direkte URL (falls Button nicht sichtbar)**
+Füge diese URL in deinem Browser ein (ersetze `DEINE-SITE`):
+```
+https://DEINE-SITE.de/wp-admin/admin-post.php?action=biederman_check_updates&_wpnonce=...
+```
+Um den korrekten Nonce zu erhalten, gehe zu **Design → Themes** und schaue in den Quellcode nach dem Link.
+
+**Option 3: Cache manuell leeren (WP-CLI)**
 ```bash
 wp transient delete biederman_latest_release
 wp transient delete update_themes
 wp theme update-check
 ```
 
-**Option 3: Cache manuell leeren (PHP)**
+**Option 4: Cache manuell leeren (PHP)**
 Füge diesen Code temporär in `functions.php` ein oder führe ihn über WP-CLI aus:
 ```php
 delete_transient('biederman_latest_release');
 delete_site_transient('update_themes');
 wp_update_themes();
+```
+
+**Option 5: Über die URL direkt (mit korrektem Nonce)**
+Erstelle einen Link mit diesem Code (temporär in functions.php):
+```php
+add_action('admin_notices', function() {
+    if (get_current_screen()->id !== 'themes') return;
+    $url = wp_nonce_url(
+        admin_url('admin-post.php?action=biederman_check_updates'),
+        'biederman_check_updates'
+    );
+    echo '<div class="notice notice-info"><p><a href="' . esc_url($url) . '" class="button">Nach Updates suchen</a></p></div>';
+});
 ```
 
 ## Konfiguration
