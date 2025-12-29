@@ -36,9 +36,6 @@ function biederman_theme_updater_init() {
     // Add manual update check action
     add_action('admin_post_biederman_check_updates', 'biederman_manual_update_check');
     
-    // Add admin notice for manual check
-    add_action('admin_notices', 'biederman_update_check_notice');
-    
     // Add admin notice with manual check button (fallback)
     add_action('admin_notices', 'biederman_update_check_admin_notice');
 }
@@ -64,14 +61,24 @@ function biederman_check_theme_update($transient) {
     
     $latest_version = $latest_release['version'];
     
-    // Compare versions
+    // Compare versions (use strict comparison)
     if (version_compare($current_version, $latest_version, '<')) {
-        $transient->response[$theme_slug] = array(
-            'theme' => $theme_slug,
-            'new_version' => $latest_version,
-            'url' => $latest_release['url'],
-            'package' => $latest_release['package'],
-        );
+        // Verify package URL exists before adding to response
+        if (!empty($latest_release['package'])) {
+            $transient->response[$theme_slug] = array(
+                'theme' => $theme_slug,
+                'new_version' => $latest_version,
+                'url' => $latest_release['url'],
+                'package' => $latest_release['package'],
+                'requires' => '5.0',
+                'requires_php' => '7.4',
+            );
+        }
+    } else {
+        // Remove from response if versions match (prevent false update notifications)
+        if (isset($transient->response[$theme_slug])) {
+            unset($transient->response[$theme_slug]);
+        }
     }
     
     return $transient;
@@ -112,25 +119,58 @@ function biederman_get_latest_release() {
     // Extract version from tag (remove 'v' prefix if present)
     $version = ltrim($data['tag_name'], 'v');
     
-    // Find ZIP asset
+    // Expected ZIP filename format: biederman-wp-theme-{version}.zip
+    $expected_filename = sprintf('biederman-wp-theme-%s.zip', $version);
+    
+    // Find ZIP asset - prioritize exact match with expected filename
     $package_url = '';
     if (isset($data['assets']) && is_array($data['assets'])) {
+        // First pass: look for exact filename match
         foreach ($data['assets'] as $asset) {
-            if (isset($asset['browser_download_url']) && strpos($asset['name'], '.zip') !== false) {
-                $package_url = $asset['browser_download_url'];
-                break;
+            if (isset($asset['browser_download_url']) && isset($asset['name'])) {
+                if ($asset['name'] === $expected_filename) {
+                    $package_url = $asset['browser_download_url'];
+                    break;
+                }
+            }
+        }
+        
+        // Second pass: look for files containing 'biederman-wp-theme' and version
+        if (empty($package_url)) {
+            foreach ($data['assets'] as $asset) {
+                if (isset($asset['browser_download_url']) && isset($asset['name'])) {
+                    if (strpos($asset['name'], 'biederman-wp-theme') !== false && 
+                        strpos($asset['name'], $version) !== false && 
+                        strpos($asset['name'], '.zip') !== false) {
+                        $package_url = $asset['browser_download_url'];
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // Third pass: fallback to any ZIP file containing 'biederman-wp-theme'
+        if (empty($package_url)) {
+            foreach ($data['assets'] as $asset) {
+                if (isset($asset['browser_download_url']) && isset($asset['name'])) {
+                    if (strpos($asset['name'], 'biederman-wp-theme') !== false && 
+                        strpos($asset['name'], '.zip') !== false) {
+                        $package_url = $asset['browser_download_url'];
+                        break;
+                    }
+                }
             }
         }
     }
     
-    // If no asset found, try to construct download URL
+    // If no asset found, construct download URL using expected format
     if (empty($package_url)) {
         $package_url = sprintf(
-            'https://github.com/%s/%s/releases/download/%s/biederman-wp-theme-%s.zip',
+            'https://github.com/%s/%s/releases/download/%s/%s',
             BIEDERMAN_GITHUB_USER,
             BIEDERMAN_GITHUB_REPO,
             $data['tag_name'],
-            $version
+            $expected_filename
         );
     }
     
@@ -223,27 +263,9 @@ function biederman_manual_update_check() {
     // Force update check
     wp_update_themes();
     
-    // Redirect back to themes page
-    wp_redirect(admin_url('themes.php?biederman_update_checked=1'));
+    // Redirect back to themes page (without notice parameter)
+    wp_redirect(admin_url('themes.php'));
     exit;
-}
-
-/**
- * Admin notice for update check
- */
-function biederman_update_check_notice() {
-    if (!isset($_GET['biederman_update_checked'])) {
-        return;
-    }
-    
-    $screen = get_current_screen();
-    if ($screen && $screen->id === 'themes') {
-        ?>
-        <div class="notice notice-success is-dismissible">
-            <p><?php esc_html_e('Update check completed. Please refresh the page to see if updates are available.', 'biederman'); ?></p>
-        </div>
-        <?php
-    }
 }
 
 /**
