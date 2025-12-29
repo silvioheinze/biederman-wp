@@ -53,11 +53,27 @@ jobs:
           [ -f blocks/show-list/src/style-index.css ] && cp blocks/show-list/src/style-index.css blocks/show-list/build/ || true
           [ -f blocks/press-assets/src/style-index.css ] && cp blocks/press-assets/src/style-index.css blocks/press-assets/build/ || true
       
+      - name: Extract version from tag
+        if: github.event_name == 'release'
+        id: version
+        run: |
+          VERSION="${{ github.event.release.tag_name }}"
+          # Remove 'v' prefix if present
+          VERSION="${VERSION#v}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+      
       - name: Create theme ZIP
         working-directory: ./
+        id: create-zip
         run: |
           cd biederman-wp
-          zip -r ../biederman-wp-theme.zip . \
+          if [ "${{ github.event_name }}" == "release" ]; then
+            ZIP_NAME="biederman-wp-theme-${{ steps.version.outputs.version }}.zip"
+          else
+            ZIP_NAME="biederman-wp-theme.zip"
+          fi
+          zip -r "../$ZIP_NAME" . \
             -x "*.git*" \
             -x "*node_modules*" \
             -x "*.DS_Store" \
@@ -75,24 +91,25 @@ jobs:
             -x ".github/*" \
             -x "templates/*.template" \
             -x "*.log"
+          echo "zip_file=$ZIP_NAME" >> $GITHUB_OUTPUT
       
       - name: Upload theme ZIP artifact
         uses: actions/upload-artifact@v4
         with:
           name: biederman-wp-theme
-          path: biederman-wp-theme.zip
+          path: ${{ steps.create-zip.outputs.zip_file }}
           retention-days: 30
       
       - name: Upload to GitHub Release
         if: github.event_name == 'release'
         run: |
-          RELEASE_ID=${{ github.event.release.id }}
+          ZIP_FILE="${{ steps.create-zip.outputs.zip_file }}"
           UPLOAD_URL="${{ github.event.release.upload_url }}"
           UPLOAD_URL="${UPLOAD_URL%\{*}"
           
           curl -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Content-Type: application/zip" \
-            --data-binary "@biederman-wp-theme.zip" \
-            "$UPLOAD_URL?name=biederman-wp-theme.zip&label=biederman-wp-theme.zip"
+            --data-binary "@$ZIP_FILE" \
+            "$UPLOAD_URL?name=$ZIP_FILE&label=$ZIP_FILE"
 
