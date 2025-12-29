@@ -67,6 +67,17 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Extracted version: $VERSION"
       
+      - name: Update version in style.css
+        if: github.event_name == 'release'
+        working-directory: ./biederman-wp
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # Update Version line in style.css (Linux sed syntax for GitHub Actions)
+          sed -i "s/Version:.*/Version: $VERSION/" style.css
+          echo "Updated style.css version to $VERSION"
+          # Verify the change
+          grep "Version:" style.css
+      
       - name: Create theme ZIP
         working-directory: ./
         id: create-zip
