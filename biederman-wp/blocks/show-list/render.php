@@ -147,11 +147,14 @@ while ($query->have_posts()) {
   // Determine pill text (TBA if no date)
   $pill_text = $show_date ? '' : 'TBA';
   
+  $show_url = get_permalink();
   echo '<li>';
+  echo '<a class="show-list__link" href="' . esc_url($show_url) . '">';
   if ($pill_text) {
     echo '<span class="pill">' . esc_html($pill_text) . '</span> ';
   }
   echo $date_text . $venue_text;
+  echo '</a>';
   echo '</li>';
 }
 

@@ -10,9 +10,16 @@ $show_location = get_post_meta(get_the_ID(), 'show_location', true);
 $show_venue = get_post_meta(get_the_ID(), 'show_venue', true);
 $show_ticket_url = get_post_meta(get_the_ID(), 'show_ticket_url', true);
 $is_featured = get_post_meta(get_the_ID(), 'show_is_featured', true);
+$permalink = get_permalink();
 ?>
 
-<article class="card <?php echo $is_featured ? 'card--featured' : ''; ?>" aria-label="<?php echo esc_attr(get_the_title()); ?>">
+<article class="card card--clickable <?php echo $is_featured ? 'card--featured' : ''; ?>" aria-label="<?php echo esc_attr(get_the_title()); ?>">
+  <a class="card__stretched-link" href="<?php echo esc_url($permalink); ?>">
+    <span class="sr"><?php echo esc_html(sprintf(__('Show details: %s', 'biederman'), get_the_title())); ?></span>
+  </a>
+  <?php if ($is_featured): ?>
+    <div class="card__badge"><?php esc_html_e('Nächster Gig', 'biederman'); ?></div>
+  <?php endif; ?>
   <?php if (has_post_thumbnail()): ?>
     <div class="card__image">
       <?php the_post_thumbnail('medium_large'); ?>
@@ -50,19 +57,19 @@ $is_featured = get_post_meta(get_the_ID(), 'show_is_featured', true);
         <?php esc_html_e('Route', 'biederman'); ?>
       </a>
     <?php endif; ?>
-    <?php if ($is_featured && $show_date): ?>
-      <button class="button btn-ics-featured" 
-              type="button" 
+    <?php if ($show_date): ?>
+      <button class="button btn-ics-show"
+              type="button"
               data-show-title="<?php echo esc_attr(get_the_title()); ?>"
               data-show-date="<?php echo esc_attr($show_date); ?>"
               data-show-location="<?php echo esc_attr($show_venue ? $show_venue . ', ' . $show_location : $show_location); ?>"
               data-show-description="<?php echo esc_attr(get_the_excerpt() ?: get_the_title()); ?>"
-              data-show-url="<?php echo esc_url($show_ticket_url ?: get_permalink()); ?>">
+              data-show-url="<?php echo esc_url($show_ticket_url ?: $permalink); ?>">
         <?php esc_html_e('In Kalender', 'biederman'); ?>
       </button>
     <?php endif; ?>
   </div>
-  <?php if ($is_featured && $show_date): ?>
+  <?php if ($show_date): ?>
     <p class="small muted show-ics-msg" role="status" aria-live="polite"></p>
   <?php endif; ?>
 </article>

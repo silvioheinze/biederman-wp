@@ -173,10 +173,9 @@ function initNewsletter(){
   });
 }
 
-function initFeaturedShowICS(){
-  // Handle ICS export for featured shows
-  const btnICSFeatured = document.querySelectorAll('.btn-ics-featured');
-  btnICSFeatured.forEach((btn) => {
+function initShowICS(){
+  const buttons = document.querySelectorAll('.btn-ics-show');
+  buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const title = btn.dataset.showTitle || 'Biederman Show';
       const dateStr = btn.dataset.showDate || '';
@@ -236,4 +235,4 @@ function initFeaturedShowICS(){
 initNav();
 initActions();
 initNewsletter();
-initFeaturedShowICS();
+initShowICS();

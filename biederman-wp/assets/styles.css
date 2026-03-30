@@ -258,8 +258,48 @@ h3{ margin: .2rem 0 .45rem; font-size: 1.15rem; }
 .meta{ margin: 0 0 1rem; color: rgba(243,245,247,.88); }
 .card__actions{ display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom: .3rem; }
 
+/* Show cards: full-card link; keep Tickets / Route / Kalender above overlay */
+.card--clickable{ position: relative; }
+.card__stretched-link{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+.card--featured > .card__stretched-link{
+  position: absolute;
+  z-index: 1;
+}
+.card--clickable .card__actions,
+.card--clickable .card__actions a,
+.card--clickable .card__actions button{
+  position: relative;
+  z-index: 2;
+}
+.card--clickable:has(.card__stretched-link:focus-visible){
+  outline: 2px solid rgba(224, 32, 106, 0.75);
+  outline-offset: 2px;
+}
+
 .list{ margin: .6rem 0 0; padding-left: 1.15rem; color: rgba(243,245,247,.9); }
 .list li{ margin: .25rem 0; color: rgba(243,245,247,.9); }
+
+.show-list__link{
+  display: block;
+  margin: .15rem 0 .15rem -.45rem;
+  padding: .35rem .5rem;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .15s ease;
+}
+.show-list__link:hover{
+  background: rgba(255, 255, 255, .06);
+}
+.show-list__link:focus-visible{
+  outline: 2px solid rgba(224, 32, 106, 0.75);
+  outline-offset: 2px;
+}
 .pill{
   display:inline-block;
   font-size: .8rem;
@@ -389,8 +429,47 @@ summary{
 }
 
 /* Responsive */
+/* Single show */
+.show-single__header h1{
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  line-height: 1.12;
+  margin: 0 0 .5rem;
+}
+.show-single__back{
+  margin: 0 0 1.25rem;
+}
+.show-single__grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+.show-single__media{
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .22);
+}
+.show-single__media img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.show-single__lead{
+  margin: 0 0 1rem;
+  color: rgba(243, 245, 247, .92);
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+.show-single__content{
+  margin-top: 0;
+}
+
 @media (max-width: 900px){
   .hero__grid, .cards, .media, .cols, .contact{
+    grid-template-columns: 1fr;
+  }
+  .show-single__grid{
     grid-template-columns: 1fr;
   }
 }
