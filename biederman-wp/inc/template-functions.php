@@ -6,6 +6,17 @@
 if (!defined('ABSPATH')) { exit; }
 
 /**
+ * URL for newsletter form Datenschutz link (privacy policy page or home #privacy).
+ */
+function biederman_newsletter_privacy_url() {
+  $policy = function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '';
+  if (!empty($policy)) {
+    return $policy;
+  }
+  return home_url('/#privacy');
+}
+
+/**
  * Get featured show
  */
 function biederman_get_featured_show() {
